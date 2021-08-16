@@ -62,11 +62,15 @@ namespace HW_Lesson_16
 
             MeasurementsList ml = new MeasurementsList(m1, m2, m3, m4, m5, m6);
 
-            Console.WriteLine(ml.GetMeasureValueByDate(new DateTime(2001,5,4)));
+            //Console.WriteLine(ml.GetMeasureValueByDate(new DateTime(2001,5,4)));
             Measurement m7 = ml.GetMeasurementByDate(new DateTime(2001, 4, 23));
             Measurement m8 = ml.GetFirstMeasurementByCity("paris");
             Console.WriteLine("true " + ml.WasThereMeasurement("berlin", new DateTime(2001, 5, 23)));
             Console.WriteLine("false " + ml.WasThereMeasurement("berlin", new DateTime(2001, 5, 4)));
+
+            float check = ml[m2.Date];
+            Measurement m9 = ml["paris"];
+            bool flag = ml["berlin", new DateTime(2001, 5, 13)];
 
 
             Console.ReadLine();

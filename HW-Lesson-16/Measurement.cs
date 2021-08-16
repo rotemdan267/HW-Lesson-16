@@ -21,17 +21,35 @@ namespace HW_Lesson_16
             ListOfMeasurements = listOfMeasurements;
         }
 
-        public float GetMeasureValueByDate(DateTime date)
+        public float this[DateTime date]
         {
-            for (int i = 0; i < ListOfMeasurements.Length; i++)
+            get
             {
-                if (date == ListOfMeasurements[i].Date)
+                for (int i = 0; i < ListOfMeasurements.Length; i++)
                 {
-                    return ListOfMeasurements[i].MeasureValue;
+                    if (date == ListOfMeasurements[i].Date)
+                    {
+                        return ListOfMeasurements[i].MeasureValue;
+                    }
                 }
+                return -1;
             }
-            return -1;
         }
+        //public Measurement this[DateTime date]
+        //{
+        //    get
+        //    {
+        //        for (int i = 0; i < ListOfMeasurements.Length; i++)
+        //        {
+        //            if (date == ListOfMeasurements[i].Date)
+        //            {
+        //                return ListOfMeasurements[i];
+        //            }
+        //        }
+        //        return null;
+        //    }
+        //}
+
         public Measurement GetMeasurementByDate(DateTime date)
         {
             for (int i = 0; i < ListOfMeasurements.Length; i++)
@@ -42,6 +60,31 @@ namespace HW_Lesson_16
                 }
             }
             return null;
+        }
+        public Measurement this[string location]
+        {
+            get 
+            {
+                DateTime date = DateTime.MaxValue;
+                for (int i = 0; i < ListOfMeasurements.Length; i++)
+                {
+                    if (location == ListOfMeasurements[i].Loacation)
+                    {
+                        if (ListOfMeasurements[i].Date < date)
+                        {
+                            date = ListOfMeasurements[i].Date;
+                        }
+                    }
+                }
+                for (int i = 0; i < ListOfMeasurements.Length; i++)
+                {
+                    if (ListOfMeasurements[i].Loacation == location && ListOfMeasurements[i].Date == date)
+                    {
+                        return ListOfMeasurements[i];
+                    }
+                }
+                return null;
+            }
         }
         public Measurement GetFirstMeasurementByCity(string location)
         {
@@ -64,6 +107,20 @@ namespace HW_Lesson_16
                 }
             }
             return null;
+        }
+        public bool this[string location, DateTime date]
+        {
+            get
+            {
+                for (int i = 0; i < ListOfMeasurements.Length; i++)
+                {
+                    if (ListOfMeasurements[i].Loacation == location && ListOfMeasurements[i].Date == date)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
         public bool WasThereMeasurement(string location, DateTime date)
         {
